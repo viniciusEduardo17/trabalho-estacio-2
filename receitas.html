@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <!-- Incluindo a folha de estilos do Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-warning" onload="preencheCatalogo()">
+
+    <div class="container-fluid">
+        <h1 class="text-center my-4">Catálogo de Receitas</h1>
+        
+        <div id="pnlCatalogo" class="d-flex flex-wrap justify-content-center"></div>
+    </div>
+
+    <script>
+        // Dados de receitas em formato JSON
+        const receitas = [
+            {
+                "titulo": "Bolo de Cenoura",
+                "imagem": "bolo.jpg", // Exemplo de imagem
+                "preparo": "Misture todos os ingredientes e asse por 40 minutos.",
+                "ingredientes": [
+                    "2 cenouras médias",
+                    "1 xícara de açúcar",
+                    "3 ovos",
+                    "1/2 xícara de óleo",
+                    "2 xícaras de farinha de trigo",
+                    "1 colher de sopa de fermento em pó"
+                ]
+            },
+            {
+                "titulo": "Pão de Queijo",
+                "imagem": "paoqueijo.jpg", // Exemplo de imagem
+                "preparo": "Misture os ingredientes e asse por 20 minutos.",
+                "ingredientes": [
+                    "250g de polvilho doce",
+                    "100ml de leite",
+                    "100ml de óleo",
+                    "1 ovo",
+                    "100g de queijo ralado",
+                    "Sal a gosto"
+                ]
+            },
+            {
+                "titulo": "Brigadeiro",
+                "imagem": "brigadeiro.jpg", // Exemplo de imagem
+                "preparo": "Misture os ingredientes e cozinhe até dar o ponto.",
+                "ingredientes": [
+                    "1 lata de leite condensado",
+                    "1 colher de sopa de manteiga",
+                    "7 colheres de sopa de achocolatado",
+                    "Chocolate granulado para enrolar"
+                ]
+            }
+        ];
+
+        // Função para gerar a lista de ingredientes
+        function getListaIngredientes(receita) {
+            let texto = '<ul>';
+            texto += receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('');
+            texto += '</ul>';
+            return texto;
+        }
+
+        // Função para gerar o painel da receita
+        function getCard(receita) {
+            return `
+                <div class="card m-2" style="width: 250px;">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <div class="card-text">
+                            ${getListaIngredientes(receita)}
+                            <hr>
+                            <p>${receita.preparo}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para preencher o catálogo de receitas
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById('pnlCatalogo');
+            const cardsHTML = receitas.map(receita => getCard(receita)).join('');
+            pnlCatalogo.innerHTML = cardsHTML;
+        }
+    </script>
+
+    <!-- Incluindo o JavaScript do Bootstrap e jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

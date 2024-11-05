@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenação com JavaScript</title>
+    <!-- Incluindo o CSS do Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="ordenando.js"></script> <!-- Inclui o arquivo ordenando.js -->
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Ordenação com JavaScript e DOM</h1>
+        
+        <div class="card shadow-sm p-4">
+            <!-- Campo de entrada numérico -->
+            <div class="form-group">
+                <label for="valor">Digite um valor:</label>
+                <input type="number" class="form-control" id="valor" placeholder="Exemplo: 5" />
+            </div>
+
+            <!-- Botão Adicionar -->
+            <button class="btn btn-primary mb-3" onclick="add()">Adicionar</button>
+
+            <!-- Campo de seleção para escolha do algoritmo -->
+            <div class="form-group">
+                <label for="algoritmo">Escolha o algoritmo:</label>
+                <select class="form-control" id="algoritmo">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="quick">Quick Sort</option>
+                </select>
+            </div>
+
+            <!-- Botões Ordenar e Misturar -->
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-success" onclick="ordenar()">Ordenar</button>
+                <button class="btn btn-warning" onclick="misturar()">Misturar</button>
+            </div>
+
+            <!-- Lista de valores -->
+            <ul id="valores" class="list-group list-group-flush mt-3"></ul>
+        </div>
+    </div>
+
+    <!-- Incluindo o JavaScript do Bootstrap e jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Função para adicionar o valor do campo de entrada à lista de valores
+        function add() {
+            const input = document.getElementById('valor');
+            const lista = document.getElementById('valores');
+            const node = document.createElement('li');
+            node.classList.add("list-group-item"); // Adiciona estilo Bootstrap ao item
+            const textNode = document.createTextNode(input.value);
+            node.appendChild(textNode);
+            lista.appendChild(node);
+            input.value = ''; // Limpa o campo de entrada
+        }
+
+        // Função para ordenar a lista de valores
+        function ordenar() {
+            const lista = document.getElementById('valores');
+            const select = document.getElementById('algoritmo');
+            let array = Array.from(lista.children).map(item => parseInt(item.innerHTML));
+
+            // Escolhe o algoritmo com base no índice selecionado
+            switch (select.selectedIndex) {
+                case 0:
+                    bubble_sort(array);
+                    break;
+                case 1:
+                    selection_sort(array);
+                    break;
+                case 2:
+                    quick_sort(array, 0, array.length - 1);
+                    break;
+            }
+
+            // Atualiza a lista com os valores ordenados
+            lista.innerHTML = array.map(value => `<li class="list-group-item">${value}</li>`).join('');
+        }
+
+        // Função para misturar os valores da lista
+        function misturar() {
+            const lista = document.getElementById('valores');
+            let array = Array.from(lista.children).map(item => parseInt(item.innerHTML));
+
+            // Aplica a função shuffle no array
+            shuffle(array, array.length);
+
+            // Atualiza a lista com os valores misturados
+            lista.innerHTML = array.map(value => `<li class="list-group-item">${value}</li>`).join('');
+        }
+    </script>
+</body>
+</html>
