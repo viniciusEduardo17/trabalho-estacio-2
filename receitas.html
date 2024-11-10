@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Receitas</title>
-    <!-- Incluindo a folha de estilos do Bootstrap -->
+    
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-warning" onload="preencheCatalogo()">
@@ -16,11 +16,11 @@
     </div>
 
     <script>
-        // Dados de receitas em formato JSON
+        
         const receitas = [
             {
                 "titulo": "Bolo de Cenoura",
-                "imagem": "bolo.jpg", // Exemplo de imagem
+                "imagem": "bolo.jpg", 
                 "preparo": "Misture todos os ingredientes e asse por 40 minutos.",
                 "ingredientes": [
                     "2 cenouras médias",
@@ -33,7 +33,7 @@
             },
             {
                 "titulo": "Pão de Queijo",
-                "imagem": "paoqueijo.jpg", // Exemplo de imagem
+                "imagem": "paoqueijo.jpg", 
                 "preparo": "Misture os ingredientes e asse por 20 minutos.",
                 "ingredientes": [
                     "250g de polvilho doce",
@@ -46,7 +46,7 @@
             },
             {
                 "titulo": "Brigadeiro",
-                "imagem": "brigadeiro.jpg", // Exemplo de imagem
+                "imagem": "brigadeiro.jpg", 
                 "preparo": "Misture os ingredientes e cozinhe até dar o ponto.",
                 "ingredientes": [
                     "1 lata de leite condensado",
@@ -57,7 +57,7 @@
             }
         ];
 
-        // Função para gerar a lista de ingredientes
+        
         function getListaIngredientes(receita) {
             let texto = '<ul>';
             texto += receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('');
@@ -65,7 +65,7 @@
             return texto;
         }
 
-        // Função para gerar o painel da receita
+       
         function getCard(receita) {
             return `
                 <div class="card m-2" style="width: 250px;">
@@ -82,7 +82,7 @@
             `;
         }
 
-        // Função para preencher o catálogo de receitas
+        
         function preencheCatalogo() {
             const pnlCatalogo = document.getElementById('pnlCatalogo');
             const cardsHTML = receitas.map(receita => getCard(receita)).join('');
@@ -90,7 +90,7 @@
         }
     </script>
 
-    <!-- Incluindo o JavaScript do Bootstrap e jQuery -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
